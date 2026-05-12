@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>ENDURALS - Elite Raiding Clan</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Exo 2', sans-serif;
+
+    background:
+    linear-gradient(
+        135deg,
+        #050510 0%,
+        #12071f 25%,
+        #1d0935 55%,
+        #2a0f4e 100%
+    );
+
+    color:#ffffff;
+
+    overflow-x:hidden;
+
+    position:relative;
+}
+
+/* GRID */
+
+body::after{
+    content:'';
+
+    position:fixed;
+    inset:0;
+
+    background-image:
+    linear-gradient(rgba(138,43,226,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(138,43,226,0.06) 1px, transparent 1px);
+
+    background-size:50px 50px;
+
+    z-index:-4;
+}
+
+/* STAR CANVAS */
+
+#stars {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -3;
+    pointer-events: none;
+}
+
+/* NAVBAR */
+
+header{
+    position:fixed;
+    top:0;
+    width:100%;
+
+    z-index:1000;
+
+    background:rgba(10,10,26,0.92);
+
+    backdrop-filter:blur(20px);
+
+    border-bottom:1px solid rgba(138,43,226,0.25);
+
+    transition:0.3s ease;
+}
+
+nav{
+    max-width:1200px;
+
+    margin:auto;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:1rem 2rem;
+}
+
+.logo{
+    font-family:'Orbitron', monospace;
+
+    font-size:2.2rem;
+    font-weight:900;
+
+    letter-spacing:4px;
+
+    background:
+    linear-gradient(
+        90deg,
+        #8a2be2,
+        #ba55d3,
+        #d8bfd8
+    );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+nav ul{
+    list-style:none;
+
+    display:flex;
+
+    gap:2.5rem;
+}
+
+nav a{
+    text-decoration:none;
+
+    color:#e8dcff;
+
+    font-weight:700;
+
+    position:relative;
+
+    transition:0.3s ease;
+}
+
+nav a::after{
+    content:'';
+
+    position:absolute;
+
+    left:0;
+    bottom:-6px;
+
+    width:0%;
+    height:2px;
+
+    background:#ba55d3;
+
+    transition:0.3s ease;
+}
+
+nav a:hover::after{
+    width:100%;
+}
+
+nav a:hover{
+    color:#ba55d3;
+
+    text-shadow:
+    0 0 12px rgba(186,85,211,0.8);
+}
+
+/* HERO */
+
+.hero{
+    min-height:100vh;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    position:relative;
+
+    padding:0 2rem;
+}
+
+.hero::before{
+    content:'';
+
+    position:absolute;
+
+    width:700px;
+    height:700px;
+
+    background:
+    radial-gradient(
+        circle,
+        rgba(138,43,226,0.22),
+        transparent 70%
+    );
+
+    filter:blur(40px);
+
+    z-index:-1;
+
+    animation:pulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes pulse{
+    from{
+        transform:scale(1);
+        opacity:0.7;
+    }
+
+    to{
+        transform:scale(1.1);
+        opacity:1;
+    }
+}
+
+/* FLOATING TITLE */
+
+.hero h1{
+    font-family:'Orbitron', monospace;
+
+    font-size:6rem;
+    font-weight:900;
+
+    letter-spacing:10px;
+
+    margin-bottom:1.5rem;
+
+    background:
+    linear-gradient(
+        45deg,
+        #8a2be2,
+        #ba55d3,
+        #e6ccff
+    );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+
+    text-shadow:
+    0 0 25px rgba(138,43,226,0.8),
+    0 0 60px rgba(138,43,226,0.4);
+
+    animation:floatTitle 3s ease-in-out infinite alternate;
+}
+
+@keyframes floatTitle{
+    from{
+        transform:translateY(0px);
+    }
+
+    to{
+        transform:translateY(-12px);
+    }
+}
+
+.hero p{
+    font-size:1.5rem;
+
+    max-width:700px;
+
+    line-height:1.6;
+
+    color:#efe4ff;
+
+    font-weight:600;
+
+    margin-bottom:3rem;
+}
+
+/* BUTTONS */
+
+.cta-button,
+.discord-btn,
+.merch-btn{
+
+    display:inline-block;
+
+    padding:1rem 2.8rem;
+
+    font-family:'Orbitron', monospace;
+    font-weight:700;
+
+    text-decoration:none;
+
+    color:white;
+
+    position:relative;
+
+    overflow:hidden;
+
+    transition:0.35s ease;
+
+    border:1px solid rgba(255,255,255,0.15);
+
+    background:
+    linear-gradient(
+        135deg,
+        #6d28d9,
+        #8a2be2,
+        #ba55d3
+    );
+
+    clip-path:polygon(
+        0 0,
+        calc(100% - 18px) 0,
+        100% 18px,
+        100% 100%,
+        18px 100%,
+        0 calc(100% - 18px)
+    );
+
+    box-shadow:
+    0 0 25px rgba(138,43,226,0.35),
+    inset 0 0 15px rgba(255,255,255,0.08);
+}
+
+.cta-button::before,
+.discord-btn::before,
+.merch-btn::before{
+
+    content:'';
+
+    position:absolute;
+
+    top:0;
+    left:-120%;
+
+    width:60%;
+    height:100%;
+
+    background:
+    linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.5),
+        transparent
+    );
+
+    transform:skewX(-25deg);
+
+    transition:0.6s;
+}
+
+.cta-button:hover::before,
+.discord-btn:hover::before,
+.merch-btn:hover::before{
+
+    left:140%;
+}
+
+.cta-button:hover,
+.discord-btn:hover,
+.merch-btn:hover{
+
+    transform:
+    translateY(-5px)
+    scale(1.03);
+
+    box-shadow:
+    0 0 45px rgba(138,43,226,0.75),
+    0 0 90px rgba(138,43,226,0.35);
+}
+
+section{
+    max-width:1200px;
+
+    margin:auto;
+
+    padding:6rem 2rem;
+}
+
+h2{
+    font-family:'Orbitron', monospace;
+
+    text-align:center;
+
+    font-size:2.7rem;
+
+    margin-bottom:1rem;
+
+    background:
+    linear-gradient(
+        90deg,
+        #8a2be2,
+        #c084ff
+    );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.container{
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit, minmax(320px, 1fr));
+
+    gap:2.5rem;
+
+    margin-top:3rem;
+}
+
+/* CARD WRAPPER */
+
+.card-wrapper{
+    position:relative;
+    transition:
+        box-shadow 0.4s ease,
+        transform 0.4s ease;
+    border-radius:2px;
+}
+
+.card-wrapper:hover{
+    transform:translateY(-20px) scale(1.04);
+    box-shadow:
+        0 0 0 1px rgba(192,132,255,0.55),
+        0 0 20px 5px rgba(138,43,226,0.7),
+        0 0 50px 10px rgba(138,43,226,0.3),
+        0 25px 60px rgba(0,0,0,0.5);
+}
+
+/* CARDS */
+
+.card{
+    position:relative;
+    isolation:isolate;
+    opacity:0;
+    transform:translateY(40px);
+
+    transition:
+    opacity 0.8s ease,
+    transform 0.4s ease,
+    border-color 0.4s ease;
+
+    padding:2.5rem;
+
+    background:rgba(255,255,255,0.06);
+
+    backdrop-filter:blur(20px);
+
+    border:1px solid rgba(138,43,226,0.25);
+
+    overflow:visible;
+
+    clip-path:polygon(
+        0 0,
+        calc(100% - 25px) 0,
+        100% 25px,
+        100% 100%,
+        25px 100%,
+        0 calc(100% - 25px)
+    );
+
+    z-index:2;
+}
+
+.card.show-card{
+    opacity:1;
+    transform:translateY(0px);
+}
+
+.card::before{
+    content:'';
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:4px;
+    background:linear-gradient(90deg, #8a2be2, #c084ff);
+}
+
+.card-wrapper:hover .card{
+    border-color:rgba(192,132,255,0.9);
+}
+
+/* STATS */
+
+.stats{
+    margin-top:4rem;
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(200px,1fr));
+
+    gap:2rem;
+
+    background:rgba(255,255,255,0.05);
+
+    backdrop-filter:blur(18px);
+
+    padding:3rem;
+
+    border:1px solid rgba(138,43,226,0.2);
+
+    clip-path:polygon(
+        0 0,
+        calc(100% - 30px) 0,
+        100% 30px,
+        100% 100%,
+        30px 100%,
+        0 calc(100% - 30px)
+    );
+}
+
+.stat{
+    font-family:'Orbitron', monospace;
+
+    font-size:3rem;
+    font-weight:900;
+
+    background:linear-gradient(90deg, #8a2be2, #d8bfd8);
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+
+    margin-bottom:0.5rem;
+}
+
+.stat-label{
+    color:#f0e6ff;
+    font-weight:700;
+}
+
+#about .card-wrapper{
+    max-width:850px;
+    margin:auto;
+}
+
+#about .card{
+    text-align:center;
+}
+
+/* LEADERSHIP */
+
+.leadership {
+  text-align: center;
+  padding: 60px 20px;
+}
+.leadership h2 {
+  color: #cc44ff;
+  font-size: 2rem;
+  letter-spacing: 4px;
+  margin-bottom: 40px;
+}
+.leaders-grid {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+.leader-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.avatar-link {
+  display: block;
+  text-decoration: none;
+  border-radius: 12px;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+.avatar-link:hover {
+  transform: translateY(-18px) scale(1.06);
+  box-shadow:
+    -18px 0 35px rgba(255,255,255,0.18),
+    18px 0 35px rgba(255,255,255,0.18),
+    0 0 40px rgba(255,255,255,0.12),
+    0 0 20px rgba(170,0,255,0.5);
+}
+.avatar-frame {
+  width: 140px;
+  height: 140px;
+  border: 3px solid #aa00ff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 20px #aa00ff88;
+  transition: border-color 0.35s ease;
+}
+.avatar-link:hover .avatar-frame {
+  border-color: #ffffff;
+}
+.avatar-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.leader-rank {
+  color: #cc44ff;
+  font-size: 0.85rem;
+  letter-spacing: 3px;
+  font-weight: bold;
+}
+.leader-name {
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* HALL OF FAME */
+
+#hof {
+    text-align: center;
+}
+
+.hof-subtitle {
+    color: #c084ff;
+    font-size: 1rem;
+    letter-spacing: 3px;
+    font-weight: 700;
+    margin-bottom: 3rem;
+    opacity: 0.85;
+}
+
+.hof-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.hof-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 2rem 1.2rem 1.5rem;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(138,43,226,0.25);
+    border-top: 3px solid transparent;
+    position: relative;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+    cursor: pointer;
+    clip-path: polygon(
+        0 0,
+        calc(100% - 18px) 0,
+        100% 18px,
+        100% 100%,
+        18px 100%,
+        0 calc(100% - 18px)
+    );
+}
+
+.hof-card.show-card {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hof-card:hover {
+    transform: translateY(-16px) scale(1.04);
+    border-color: rgba(192,132,255,0.9);
+    box-shadow:
+        0 0 0 1px rgba(192,132,255,0.4),
+        0 0 25px 6px rgba(138,43,226,0.6),
+        0 0 55px 12px rgba(138,43,226,0.25),
+        0 20px 50px rgba(0,0,0,0.5);
+}
+
+.hof-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, #8a2be2, #c084ff);
+}
+
+.hof-medal {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.5rem;
+    filter: drop-shadow(0 0 8px rgba(255,200,0,0.7));
+}
+
+.hof-avatar-wrap {
+    width: 90px;
+    height: 90px;
+    border-radius: 10px;
+    border: 2px solid #aa00ff;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(170,0,255,0.5);
+    margin-top: 10px;
+    transition: border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.hof-card:hover .hof-avatar-wrap {
+    border-color: #ffffff;
+    box-shadow: 0 0 20px rgba(255,255,255,0.3);
+}
+
+.hof-avatar-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hof-rank-badge {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 3px 10px;
+    border-radius: 3px;
+    background: rgba(138,43,226,0.3);
+    border: 1px solid rgba(192,132,255,0.4);
+    color: #e2c6ff;
+}
+
+.hof-name {
+    font-family: 'Orbitron', monospace;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #ffffff;
+    letter-spacing: 1px;
+}
+
+.hof-stats {
+    display: flex;
+    gap: 1rem;
+    margin-top: 4px;
+}
+
+.hof-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.hof-stat-num {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.1rem;
+    font-weight: 900;
+    background: linear-gradient(90deg, #8a2be2, #e2c6ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hof-stat-label {
+    font-size: 0.65rem;
+    color: #c084ff;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* FOOTER */
+
+footer{
+    margin-top:5rem;
+
+    background:rgba(10,10,26,0.9);
+
+    backdrop-filter:blur(15px);
+
+    border-top:1px solid rgba(138,43,226,0.25);
+
+    padding:3rem 2rem;
+
+    text-align:center;
+}
+
+footer p{
+    color:#efe4ff;
+    margin-bottom:1rem;
+}
+
+footer a{
+    color:#c084ff;
+    text-decoration:none;
+    font-weight:700;
+}
+
+footer a:hover{
+    text-shadow:0 0 10px rgba(138,43,226,0.7);
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+    .hero h1{
+        font-size:3.4rem;
+        letter-spacing:4px;
+    }
+
+    .hero p{
+        font-size:1.1rem;
+    }
+
+    nav{
+        flex-direction:column;
+        gap:1rem;
+    }
+
+    nav ul{
+        gap:1.2rem;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .container{
+        grid-template-columns:1fr;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<canvas id="stars"></canvas>
+
+<header>
+<nav>
+
+<div class="logo">ENDURALS</div>
+
+<ul>
+<li><a href="#home">Home</a></li>
+<li><a href="#join">Join</a></li>
+<li><a href="hof.html">Hall Of Fame</a></li>
+<li><a href="#merch">Merch</a></li>
+<li><a href="#about">About</a></li>
+</ul>
+
+</nav>
+</header>
+
+<!-- HERO -->
+
+<section id="home" class="hero">
+
+<h1>ENDURALS</h1>
+
+<p>Elite Raiding Clan • Dominate Every Server • Become A Legend</p>
+
+<a href="#join" class="cta-button">JOIN THE RAID</a>
+
+</section>
+
+<!-- LEADERSHIP -->
+
+<section class="leadership">
+  <h2>⚡ THE LEADERSHIP</h2>
+  <div class="leaders-grid">
+
+    <div class="leader-card" id="owner-card">
+      <a href="https://www.roblox.com/users/1309226294/profile" target="_blank" class="avatar-link">
+        <div class="avatar-frame">
+          <img id="owner-avatar" src="" alt="Owner Avatar" />
+        </div>
+      </a>
+      <div class="leader-rank">👑 OWNER</div>
+      <div class="leader-name">ZIA</div>
+    </div>
+
+    <div class="leader-card" id="coowner-card">
+      <a href="https://www.roblox.com/users/9721428880/profile" target="_blank" class="avatar-link">
+        <div class="avatar-frame">
+          <img id="coowner-avatar" src="" alt="Co-Owner Avatar" />
+        </div>
+      </a>
+      <div class="leader-rank">⚡ CO-OWNER</div>
+      <div class="leader-name">Arthur</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- JOIN -->
+
+<section id="join">
+
+<h2>⚡ GET INVOLVED</h2>
+
+<div class="container">
+
+  <div class="card-wrapper">
+  <div class="card">
+  <h3>🎮 Join Discord</h3>
+  <p>Connect with 300+ active raiders. Participate in raid planning, live events and elite coordination.</p>
+  <br>
+  <a href="https://discord.gg/tX6kwPFws3" target="_blank" class="discord-btn">JOIN DISCORD</a>
+  </div>
+  </div>
+
+  <div class="card-wrapper">
+  <div class="card">
+  <h3>🛒 Official Merch</h3>
+  <p>Represent Endurals with exclusive futuristic clan gear and accessories.</p>
+  <br>
+  <a href="https://www.roblox.com/catalog/82438256284533/Endurals" target="_blank" class="merch-btn">BUY MERCH</a>
+  </div>
+  </div>
+
+</div>
+
+<!-- CENTERED 3RD CARD -->
+
+<div style="display:flex; justify-content:center; margin-top:2.5rem;">
+  <div class="card-wrapper" style="max-width:420px; width:100%;">
+  <div class="card">
+  <h3>🏰 Roblox Group</h3>
+  <p>Join our official Roblox community. Rank up, participate in group raids and rep Endurals in-game.</p>
+  <br>
+  <a href="https://www.roblox.com/communities/8191161/Z-Division-Legacy#!/about" target="_blank" class="cta-button">JOIN GROUP</a>
+  </div>
+  </div>
+</div>
+
+<div class="stats">
+
+  <div>
+  <div class="stat">300+</div>
+  <div class="stat-label">ACTIVE MEMBERS</div>
+  </div>
+
+  <div>
+  <div class="stat">500+</div>
+  <div class="stat-label">RAIDS COMPLETED</div>
+  </div>
+
+  <div>
+  <div class="stat">24/7</div>
+  <div class="stat-label">ONLINE</div>
+  </div>
+
+</div>
+
+</section>
+
+<!-- ABOUT -->
+
+<section id="about">
+
+<h2>⚔ ABOUT ENDURALS</h2>
+
+<div class="card-wrapper">
+<div class="card">
+
+<p>Endurals is an elite futuristic raiding clan built for domination, precision and teamwork.</p>
+
+<br>
+
+<p>We execute flawless raids, dominate servers and build legends through strategy and loyalty.</p>
+
+<br>
+
+<p><strong>REQUIREMENTS:</strong> Active • Skilled • Loyal • Ready To Raid</p>
+
+</div>
+</div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+<p>© 2026 ENDURALS • ALL RIGHTS RESERVED</p>
+
+<p>
+<a href="https://discord.gg/tX6kwPFws3" target="_blank">DISCORD</a>
+•
+<a href="https://www.roblox.com/catalog/82438256284533/Endurals" target="_blank">MERCH</a>
+•
+<a href="https://www.roblox.com/communities/8191161/Z-Division-Legacy#!/about" target="_blank">GROUP</a>
+</p>
+
+</footer>
+
+<script>
+
+// AVATAR LOADER
+
+async function loadAvatar(userId, imgElementId) {
+  try {
+    const res = await fetch(
+      `https://thumbnails.roproxy.com/v1/users/avatar-headshot?userIds=${userId}&size=420x420&format=Png&isCircular=false`
+    );
+    const data = await res.json();
+    if (data.data && data.data[0] && data.data[0].imageUrl) {
+      document.getElementById(imgElementId).src = data.data[0].imageUrl;
+    }
+  } catch (err) {
+    console.error("Failed to load avatar for", userId, err);
+  }
+}
+
+loadAvatar(1309226294, "owner-avatar");
+loadAvatar(9721428880, "coowner-avatar");
+
+// SEAMLESS STAR CANVAS
+
+const canvas = document.getElementById('stars');
+const ctx = canvas.getContext('2d');
+
+function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+const stars = Array.from({ length: 200 }, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 1.4 + 0.3,
+    speed: Math.random() * 0.4 + 0.1,
+    opacity: Math.random() * 0.7 + 0.3
+}));
+
+function drawStars() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (const s of stars) {
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(200,160,255,${s.opacity})`;
+        ctx.fill();
+        s.y -= s.speed;
+        if (s.y + s.r < 0) {
+            s.y = canvas.height + s.r;
+            s.x = Math.random() * canvas.width;
+        }
+    }
+    requestAnimationFrame(drawStars);
+}
+
+drawStars();
+
+// NAVBAR SCROLL EFFECT
+
+window.addEventListener('scroll', () => {
+    const header = document.querySelector('header');
+    if(window.scrollY > 50){
+        header.style.background = 'rgba(10,10,20,0.98)';
+        header.style.boxShadow = '0 10px 35px rgba(138,43,226,0.25)';
+    } else {
+        header.style.background = 'rgba(10,10,20,0.92)';
+        header.style.boxShadow = 'none';
+    }
+});
+
+// HALL OF FAME AVATARS
+
+document.querySelectorAll('.hof-avatar').forEach(async (img) => {
+  const uid = img.dataset.uid;
+  if (!uid || uid === '000000000') return;
+  try {
+    const res = await fetch(
+      `https://thumbnails.roproxy.com/v1/users/avatar-headshot?userIds=${uid}&size=420x420&format=Png&isCircular=false`
+    );
+    const data = await res.json();
+    if (data.data && data.data[0] && data.data[0].imageUrl) {
+      img.src = data.data[0].imageUrl;
+    }
+  } catch(e) {}
+});
+
+// CARD FADE IN
+
+const cards = document.querySelectorAll('.card, .hof-card');
+
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if(entry.isIntersecting){
+            entry.target.classList.add('show-card');
+        }
+    });
+}, { threshold: 0.15 });
+
+cards.forEach(card => {
+    observer.observe(card);
+});
+
+</script>
+
+</body>
+</html>
